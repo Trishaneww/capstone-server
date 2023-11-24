@@ -61,6 +61,30 @@ router.post("/:id", async (req, res) => {
   }
 });
 
+router.put("/flashcard/:id", async (req, res) => {
+  const updates = req.body;
+
+  try {
+    const number = await knex("warehouses")
+      .where({ id: req.params.id })
+      .update(updates);
+
+    if (number) {
+      const updatedwarehouse = await knex("warehouses").where({ id: number });
+      res.status(200).json(updatedwarehouse);
+    } else {
+      console.log("error updating ");
+      res
+        .status(404)
+        .json({ message: `Warehouse ID: ${req.params.id} doesn't exist` });
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error updating new warehouse", error: err });
+  }
+});
+
 
 router.delete("/:id", async (req, res) => {
   try {

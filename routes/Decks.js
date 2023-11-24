@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
       const data = await knex("decks")
       .join('users', 'users.id', 'decks.user_id')
       .select('decks .*', 'users.username')
+      .where({status: "public"})
 
       res.status(200).send(data);
     } catch (err) {
@@ -33,7 +34,7 @@ router.get("/find/:id", async (req, res) => {
     const data = await knex("decks")
     .join('users', 'users.id', 'decks.user_id')
     .select('decks .*', 'users.username')
-    .where({'title':req.params.id})
+    .where({'title':req.params.id, 'status':'public'})
 
     res.status(200).send(data);
     console.log(req.params.id)
