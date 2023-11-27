@@ -15,6 +15,24 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/favourite/:id", async (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  try {
+    const data = await knex("decks")
+    .join('users', 'users.id', 'decks.user_id')
+    .select('decks .*', 'users.username')
+    .where({isFavourite: 1, user_id: req.params.id})
+
+    console.log(data)
+
+    res.status(200).send(data);
+  } catch (err) {
+    res.status(400).send(`Error retrieving flashcards: ${err}`);
+  }
+});
+
+
 router.get("/user/:id", async (req, res) => {
   try {
     const data = await knex("decks")

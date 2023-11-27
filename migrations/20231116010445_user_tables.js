@@ -24,6 +24,7 @@ exports.up = function (knex) {
           .onUpdate('CASCADE')
           .onDelete('CASCADE');
         table.string('title').notNullable();
+        table.boolean('isFavourite').defaultTo(false);
         table.string('description').notNullable();
         table.string('category').notNullable();
         table.string('status').notNullable();

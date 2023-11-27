@@ -14,7 +14,7 @@ module.exports = [
     },
     {
         id: 2,
-        username: 'Trent012',
+        username: 'Trent11',
         email: 'trent@gmail.com',
         password: '123',
         isAdmin: false,
@@ -22,8 +22,8 @@ module.exports = [
     },
     {
         id: 3,
-        username: 'Riri0108',
-        email: 'Rihanna@gmail.com',
+        username: 'Bob',
+        email: 'bob@gmail.com',
         password: '12345',
         isAdmin: false,
         activity: 0

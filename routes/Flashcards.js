@@ -26,7 +26,49 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.post("/favourite/:id", async (req, res) => {
+  const {question, answer} = req.body
+  const deck = await knex('decks')
+    .where({isFavourite: 1, user_id: req.params.id})
+    console.log(deck[0].id)
 
+    const newFlashcard = {
+      deck_id:deck[0].id,
+      question: question,
+      answer: answer,
+    };
+    
+  try {
+    const data = await knex.insert(newFlashcard).into("flashcards");
+    const newFlashcardId = data[0];
+    const createdFlashcard = await knex("flashcards").where({
+      id: newFlashcardId,
+    });
+
+    console.log(createdFlashcard);
+
+    try {
+      const user = await knex('users')
+      .where({id: 1})
+      .update({activity: 1})
+      if (user) {
+        const updatedUser = await knex("users").where({ id: user });
+        console.log(updatedUser)
+        res.status(200).json(updatedUser);
+      } else {
+        console.log("doesnt exist")
+      }
+    } catch (Err) {
+      console.log(Err)
+    }
+
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: `Unable to create new deck: ${err}` });
+      console.log({ message: `Unable to create new deck: ${err}` });
+  }
+});
 
 router.post("/:id", async (req, res) => {
   try {
