@@ -24,8 +24,6 @@ router.get("/favourite/:id", async (req, res) => {
     .select('decks .*', 'users.username')
     .where({isFavourite: 1, user_id: req.params.id})
 
-    console.log(data)
-
     res.status(200).send(data);
   } catch (err) {
     res.status(400).send(`Error retrieving flashcards: ${err}`);
@@ -39,8 +37,6 @@ router.get("/user/:id", async (req, res) => {
     .where({'user_id':req.params.id})
 
     res.status(200).send(data);
-    console.log(req.params.id)
-    console.log(data)
   } catch (err) {
     console.log("no match")
     res.status(400).send(`Error retrieving flashcards: ${err}`);
@@ -48,15 +44,14 @@ router.get("/user/:id", async (req, res) => {
 });
 
 router.get("/find/:id", async (req, res) => {
+  console.log(req.params.id)
   try {
     const data = await knex("decks")
     .join('users', 'users.id', 'decks.user_id')
     .select('decks .*', 'users.username')
-    .where({'title':req.params.id, 'status':'public'})
+    .where({'coursecode':req.params.id, 'status':'public'})
 
     res.status(200).send(data);
-    console.log(req.params.id)
-    console.log(data)
   } catch (err) {
     console.log("no match")
     res.status(400).send(`Error retrieving flashcards: ${err}`);

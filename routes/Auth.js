@@ -26,13 +26,14 @@ router.post('/register', async (req, res) => {
     const newuser = await knex("users")
       .where({id: newUserId,});
     console.log(newuser)
-    console.log(newUserId)
     const favouriteDeck = {
       user_id: newUserId,
       title: 'Favourite',
       description: 'Favourites deck',
       isFavourite: true,
-      category: 'Favourite',
+      faculty: 'none',
+      coursecode: 'none',
+      school: 'none',
       status: 'hidden'
     }
       const newdeck = await knex.insert(favouriteDeck).into("decks");
@@ -65,13 +66,10 @@ router.post('/login', async (req, res) => {
     return res.status(400).send("Invalid email");
   } else {
     console.log(user)
-    console.log(user[0].password)
 
     if (password === user[0].password) {
       console.log("SUCCESS")
     } else {
-        console.log(req.body.password)
-        console.log(user[0].password)
         console.log("invalid password")
         return res.status(400).send("Invalid password");
     }
