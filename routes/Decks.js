@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
 
 router.get("/favourite/:id", async (req, res) => {
   const id = req.params.id
-  console.log(id)
   try {
     const data = await knex("decks")
     .join('users', 'users.id', 'decks.user_id')
@@ -38,13 +37,11 @@ router.get("/user/:id", async (req, res) => {
 
     res.status(200).send(data);
   } catch (err) {
-    console.log("no match")
     res.status(400).send(`Error retrieving flashcards: ${err}`);
   }
 });
 
 router.get("/find/:id", async (req, res) => {
-  console.log(req.params.id)
   try {
     const data = await knex("decks")
     .join('users', 'users.id', 'decks.user_id')
@@ -53,7 +50,6 @@ router.get("/find/:id", async (req, res) => {
 
     res.status(200).send(data);
   } catch (err) {
-    console.log("no match")
     res.status(400).send(`Error retrieving flashcards: ${err}`);
   }
 });
@@ -79,13 +75,10 @@ router.post("/", async (req, res) => {
         id: newDeckId,
       });
 
-      console.log(createdDeck);
-
     } catch (err) {
       res
         .status(500)
         .send({ message: `Unable to create new deck: ${err}` });
-        console.log({ message: `Unable to create new deck: ${err}` });
     }
 });
 

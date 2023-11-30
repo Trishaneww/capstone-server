@@ -25,7 +25,6 @@ router.post('/register', async (req, res) => {
     const newUserId = user[0]
     const newuser = await knex("users")
       .where({id: newUserId,});
-    console.log(newuser)
     const favouriteDeck = {
       user_id: newUserId,
       title: 'Favourite',
@@ -42,11 +41,9 @@ router.post('/register', async (req, res) => {
         id: newDeckId,
       });
 
-      console.log(createdDeck);
 
     res.status(201).send("Registered successfully");
   } catch (error) {
-    console.log(error);
     res.status(400).send("Failed registration");
   }
 });
@@ -62,16 +59,11 @@ router.post('/login', async (req, res) => {
   // Find the user
   const user = await knex('users').where({ email: email });
   if (!user) {
-    console.log(user)
-    console.log("invalid email")
     return res.status(400).send("Invalid email");
   } else {
-    console.log(user)
 
     if (password === user[0].password) {
-      console.log("SUCCESS")
     } else {
-        console.log("invalid password")
         return res.status(400).send("Invalid password");
     }
   }
@@ -120,8 +112,6 @@ router.get('/current/no-mid', async (req, res) => {
   // Verify the token
   try {
     const decoded = jwt.verify(authToken, process.env.JWT_SECRET);
-
-    console.log('Decoded: ', decoded);
 
     // Respond with the appropriate user data
     const user = await knex('users').where({ id: decoded.id }).first();
