@@ -5,6 +5,9 @@ const authorize = require('./middlewares/auth')
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io")
+
+const PORT = 8080
+const PORT2 = 8081
 app.use(cors
   ({origin:'http://localhost:3000', 
     credentials:true,            
@@ -83,11 +86,10 @@ io.on("connection", (socket) => {
     })
 })
 
-server.listen(3002, () => {
-    console.log("SERVER RUNNING")
+server.listen(process.env.PORT2 || PORT2, () => {
+    console.log(`SERVER RUNNING on ${PORT2}`)
 })
 
-
-app.listen(1666, () => {
-    console.log(`running at http://localhost:1666`);
+app.listen(process.env.PORT || PORT, () => {
+    console.log(`running at ${PORT}`);
 });
