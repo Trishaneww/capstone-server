@@ -30,7 +30,6 @@ router.post("/favourite/:id", async (req, res) => {
   const {question, answer} = req.body
   const deck = await knex('decks')
     .where({isFavourite: 1, user_id: req.params.id})
-    console.log(deck[0].id)
 
     const newFlashcard = {
       deck_id:deck[0].id,
@@ -45,7 +44,6 @@ router.post("/favourite/:id", async (req, res) => {
       id: newFlashcardId,
     });
 
-    console.log(createdFlashcard);
 
     try {
       const user = await knex('users')
@@ -53,20 +51,16 @@ router.post("/favourite/:id", async (req, res) => {
       .update({activity: 1})
       if (user) {
         const updatedUser = await knex("users").where({ id: user });
-        console.log(updatedUser)
         res.status(200).json(updatedUser);
       } else {
-        console.log("doesnt exist")
       }
     } catch (Err) {
-      console.log(Err)
     }
 
   } catch (err) {
     res
       .status(500)
       .send({ message: `Unable to create new deck: ${err}` });
-      console.log({ message: `Unable to create new deck: ${err}` });
   }
 });
 
@@ -78,7 +72,6 @@ router.post("/", async (req, res) => {
       id: newFlashcardId,
     });
 
-    console.log(createdFlashcard);
 
     try {
       const user = await knex('users')
@@ -86,26 +79,21 @@ router.post("/", async (req, res) => {
       .update({activity: 1})
       if (user) {
         const updatedUser = await knex("users").where({ id: user });
-        console.log(updatedUser)
         res.status(200).json(updatedUser);
       } else {
-        console.log("doesnt exist")
       }
     } catch (Err) {
-      console.log(Err)
     }
 
   } catch (err) {
     res
       .status(500)
       .send({ message: `Unable to create new deck: ${err}` });
-      console.log({ message: `Unable to create new deck: ${err}` });
   }
 });
 
 router.put("/:id", async (req, res) => {
   const updates = req.body;
-  console.log(updates)
 
   try {
     const number = await knex("flashcards")
@@ -116,7 +104,6 @@ router.put("/:id", async (req, res) => {
       const updatedwarehouse = await knex("flashcards").where({ id: number });
       res.status(200).json(updatedwarehouse);
     } else {
-      console.log("error updating ");
       res
         .status(404)
         .json({ message: `Warehouse ID: ${req.params.id} doesn't exist` });
