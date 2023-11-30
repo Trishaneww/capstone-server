@@ -14,9 +14,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const community = await knex('communities').where({'id':req.params.id})
+    const community = await knex('communities')
+    .join('users', 'users.id', 'communities.admin_id')
+    .select('communities .*', 'users.username', 'users.email')
+    .where({'communities.id':req.params.id})
     res.status(200).send(community);
   } catch (err) {
+    console.log(err)
     res.status(400).send(`Error retrieving flashcards: ${err}`);
   }
 });
@@ -41,6 +45,8 @@ router.get("/find/:id1/:id2", async (req, res) => {
   console.log(school)
   try {
     const data = await knex("decks")
+    .join('users', 'users.id', 'decks.user_id')
+    .select('decks .*', 'users.username')
     .where({'coursecode':req.params.id1, 'school':school})
     res.status(200).send(data);
     console.log(data)

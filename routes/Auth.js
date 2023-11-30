@@ -62,6 +62,7 @@ router.post('/login', async (req, res) => {
   // Find the user
   const user = await knex('users').where({ email: email });
   if (!user) {
+    console.log(user)
     console.log("invalid email")
     return res.status(400).send("Invalid email");
   } else {
@@ -79,7 +80,7 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign(
     { id: user[0].id, email: user[0].email },
     process.env.JWT_SECRET,
-    { expiresIn: "20m" } // realistically keep it to a couple of hours, ie: "8h"
+    { expiresIn: "50m" } // realistically keep it to a couple of hours, ie: "8h"
   )
 
   // Send the token as a response
@@ -99,7 +100,7 @@ router.get(
       delete user.password;
       res.json(user);
     } catch (error) {
-        
+
     }
   }
 )
@@ -131,5 +132,6 @@ router.get('/current/no-mid', async (req, res) => {
       return res.status(401).send("Invalid auth token");
   }
 })
+
 
 module.exports = router

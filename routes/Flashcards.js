@@ -70,7 +70,7 @@ router.post("/favourite/:id", async (req, res) => {
   }
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const data = await knex.insert(req.body).into("flashcards");
     const newFlashcardId = data[0];
@@ -103,16 +103,17 @@ router.post("/:id", async (req, res) => {
   }
 });
 
-router.put("/flashcard/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const updates = req.body;
+  console.log(updates)
 
   try {
-    const number = await knex("warehouses")
+    const number = await knex("flashcards")
       .where({ id: req.params.id })
       .update(updates);
 
     if (number) {
-      const updatedwarehouse = await knex("warehouses").where({ id: number });
+      const updatedwarehouse = await knex("flashcards").where({ id: number });
       res.status(200).json(updatedwarehouse);
     } else {
       console.log("error updating ");

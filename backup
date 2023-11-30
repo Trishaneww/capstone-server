@@ -163,3 +163,38 @@ app.delete('/users/:id', verify, (req, res) => {
 //     }
 // });
 // module.exports = router
+
+
+
+{/* <div className="deck-container">
+            <div className="deck-container-flashcard" style={{width: "100%" }}>
+                {flashcards.map((flashcard, index) => {
+                    return (
+                        <div style={{width: "100%" }}>
+                        {index === current && (
+                            <Flashcard flashcard={flashcard} index={index}/>
+                            )}
+                        </div>
+                    )
+                })}
+            </div>
+                {current !== length && (
+                    <div className="deck-container__arrows-container">
+                        <div className="deck-container__arrows-container-arrow" onClick={incorrect}>
+                          <AiOutlineClose style={{color: "red"}} size={30} />
+                      </div>
+                      <p>{current + 1}/{flashcards.length}</p>
+                      <div className="deck-container__arrows-container-arrow" onClick={correct}>
+                          <IoMdCheckmark style={{color: "green"}}size={30} />
+                      </div>  
+                      </div>
+                )}
+
+                {current === length && (
+                    <div>
+                        <div style={{ width: 200, height: 200 }}>
+                            <CircularProgressbar value={percent} strokeWidth={10} text={`${percent}%`} styles={buildStyles({strokeLinecap: 'butt', textSize: '16px', pathColor: `#f7b4ff`, textColor: 'white', trailColor: '#474a4d'})}/>;
+                        </div>
+                    </div>
+                )}
+        </div> */}

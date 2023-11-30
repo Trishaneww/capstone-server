@@ -35,7 +35,6 @@ app.use("/communities", communitiesRoute)
 app.use("/comments", commentsRoute)
 app.use("/usercommunities", userCommunitiesRoute)
 
-
 app.get("/", (req, res) => {
   res.send("DEFAULT");
 });
@@ -47,7 +46,6 @@ const io = new Server(server, {
       origin: "http://localhost:3000",
   }
 })
-
 
 io.on("connection", (socket) => {
     console.log(`user connected ${socket.id}`)

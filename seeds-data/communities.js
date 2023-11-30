@@ -6,6 +6,7 @@ module.exports = [
     {
         id: 1,
         title: 'UBC CS',
+        admin_id: 1,
         faculty: 'Computer Science',
         coursecode: 'CPSC110',
         description: 'UBC cs student community',
@@ -14,6 +15,7 @@ module.exports = [
     {
         id: 2,
         title: 'UOFT LIFE SCI',
+        admin_id: 1,
         faculty: 'Biology',
         coursecode: 'HBSc',
         description: 'UofTs life science student community',
@@ -22,6 +24,7 @@ module.exports = [
     {
         id: 3,
         title: 'MCMASTER ENG',
+        admin_id: 2,
         faculty: 'Engineering',
         coursecode: 'ENG',
         description: 'McMasters eng student community',
@@ -30,6 +33,7 @@ module.exports = [
     {
         id: 4,
         title: 'IVEY Business',
+        admin_id: 3,
         faculty: 'Business',
         coursecode: 'ECON',
         description: 'IVEY business student community',

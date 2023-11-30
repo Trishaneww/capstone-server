@@ -58,6 +58,12 @@ exports.up = function (knex) {
       })
       .createTable('communities', (table) => {
         table.increments('id').primary();
+        table
+          .integer('admin_id')
+          .unsigned()
+          .references('users.id')
+          .onUpdate('CASCADE')
+          .onDelete('CASCADE');
         table.string('title').notNullable();
         table.string('description').notNullable();
         table.string('faculty').notNullable();
