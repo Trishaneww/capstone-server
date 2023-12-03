@@ -63,16 +63,18 @@ router.post('/login', async (req, res) => {
   } else {
 
     if (password === user[0].password) {
+      
     } else {
         return res.status(400).send("Invalid password");
     }
   }
 
   // Generate a token
+
   const token = jwt.sign(
     { id: user[0].id, email: user[0].email },
     process.env.JWT_SECRET,
-    { expiresIn: "50m" } // realistically keep it to a couple of hours, ie: "8h"
+    { expiresIn: "8h" } // realistically keep it to a couple of hours, ie: "8h"
   )
 
   // Send the token as a response

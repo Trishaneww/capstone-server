@@ -6,7 +6,7 @@ const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io")
 
-const PORT = 8080
+const PORT = 1666
 const PORT2 = 8081
 app.use(cors
   ({origin:'http://localhost:3000', 
@@ -17,7 +17,6 @@ app.use(cors
 require("dotenv").config();
 app.use(cookieParser())
 app.use(express.json());
-
 
 const userRoute = require('./routes/Users')
 const deckRoute = require('./routes/Decks')
